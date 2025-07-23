@@ -42,7 +42,7 @@ app.post("/weather", async(req,res) => {
 app.get("/weather/history", async (req, res) => {
   try {
     const city = req.query.city;
-    const days = Number(req.query.days) || 15; // default to 15 if not provided
+    const days = Number(req.query.days) || 15;
 
     const now = new Date();
     const startOfDay = new Date(now);
@@ -52,7 +52,7 @@ app.get("/weather/history", async (req, res) => {
     const endOfDay = new Date(now);
     endOfDay.setHours(23, 59, 59, 999);
     const results = await City.find({
-      city: { $regex: new RegExp(`^${city}$`, 'i') }, // case-insensitive match
+      city: { $regex: new RegExp(`^${city}$`, 'i') },
       createdAt: {
         $gte: startOfDay,
         $lte: endOfDay,
